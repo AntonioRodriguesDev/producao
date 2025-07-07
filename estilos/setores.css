@@ -29,9 +29,9 @@ padding: 0;
 
 h1{
     
-    font-size: max(4vw,30px);
+    font-size: max(2vw,30px);
     font-variant: small-caps;
-    padding: 30px;
+    padding: 10px;
     text-shadow: 2px 2px 4px rgba(143, 238, 245, 0.555);
     box-shadow: 8px 8px 12px black;
     margin: 8px;
@@ -39,7 +39,7 @@ h1{
 }
 h3{
     font-size: 1,5em;
-    padding: 20px; 
+    padding: 5px; 
 }
 
 a{
@@ -55,12 +55,12 @@ div>a>:hover{
     transition: 0.3s, border 0,5s;
 }
 div{
-    font-size: min(6vw,30px);
+    font-size: min(2vw,30px);
     font-variant: small-caps;
-    padding: 20px;
+    padding: 10px;
     text-shadow: 2px 2px 4px rgba(143, 238, 245, 0.555);
     box-shadow: 8px 8px 12px black;
-    margin: 15px 20vw 15px 20vw;
+    margin: 1VH 15vw 1VH 15vw;
     text-align: center;
     background-image: linear-gradient(rgba(6, 235, 235, 0.377) 50%, rgba(3, 62, 77, 0.815)80%, rgb(3, 45, 53) 100%)
 }
