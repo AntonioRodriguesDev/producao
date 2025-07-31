@@ -8,19 +8,30 @@ service_name = 'METALSINOS'
 
 dsn_tns = cx_Oracle.makedsn(host, port, service_name=service_name)
 
-try:
-    connection = cx_Oracle.connect(user=username, password=password, dsn=dsn_tns)
-    print("Conexão estabelecida com sucesso!")
 
-    # Criar cursor e executar uma query
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM programacao_diaria pd inner join metalsinos.pcm_temp_coletor ptc on ptc.talao = pd.talao")
-    for row in cursor:
-        print(row)
+conn = cx_Oracle.connect(user=username, password=password, dsn=dsn_tns)
+cursor = conn.cursor()
+cursor.execute("SELECT * FROM programacao_diaria pd")
+colunas = [desc[0] for desc in cursor.description]
+linhas = cursor.fetchall()   
 
-    # Fechar conexões
-    cursor.close()
-    connection.close()
+def formatar_celula(valor):
+    if hasattr(valor, "strftime"):  # datetime
+        return valor.strftime("%Y-%m-%d %H:%M:%S")
+    return valor
 
-except cx_Oracle.DatabaseError as e:
-    print("Erro ao conectar ao banco de dados:", e)
+
+# Criar HTML
+html = "<table border='1'>\n"
+html += "  <thead><tr>" + "".join(f"<th>{col}</th>" for col in colunas) + "</tr></thead>\n"
+html += "  <tbody>\n"
+for linha in linhas:
+    html += "    <tr>" + "".join(f"<td>{formatar_celula(celula)}</td>" for celula in linha) + "</tr>\n"
+html += "  </tbody>\n</table>"
+
+# Exibir ou salvar
+print(html)
+
+# (Opcional) salvar como arquivo
+with open("teste.html", "w", encoding="utf-8") as f:
+    f.write(html)
