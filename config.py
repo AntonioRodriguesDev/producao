@@ -11,7 +11,7 @@ dsn_tns = cx_Oracle.makedsn(host, port, service_name=service_name)
 
 conn = cx_Oracle.connect(user=username, password=password, dsn=dsn_tns)
 cursor = conn.cursor()
-cursor.execute("SELECT * FROM programacao_diaria pd")
+cursor.execute("SELECT * FROM METALSINOS.GEN_FOTOS x WHERE x.CODIGO = 5315")
 colunas = [desc[0] for desc in cursor.description]
 linhas = cursor.fetchall()   
 
